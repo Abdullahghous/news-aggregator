@@ -1,0 +1,25 @@
+.banner {
+    background: #F5F5F5;
+    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 24px 0px 24px 0px;
+    width: 100%;
+}
+
+.banner-title {
+    color: #6B6E74;
+    margin: 0px;
+    text-transform: uppercase;
+}
+
+.banner-info {
+    text-align: center;
+}
+
+.banner-info > span {
+    color: #E10E0E;
+    margin: 0px;
+}

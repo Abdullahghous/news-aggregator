@@ -1,5 +1,5 @@
-import "./articles.css";
 import { format } from "date-fns";
+import "./articles.css";
 
 const ArticleInfo = (prop) => {
   return (

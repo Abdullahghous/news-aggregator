@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const NEWS_API_KEY = '1b5785319e1b40e48486352dbe05a63e';
 const NYT_API_KEY = 'JyChfVgHc4rk5EjG14gtKWuTadbYEA6Z';
-const BBC_API_KEY = 'your_bbc_key';
+const BBC_API_KEY = '';
 
 const getNewsAPIArticles = async (seachVal: string) => {
   const response = await axios.get(`https://newsapi.org/v2/everything?q=${seachVal}&apiKey=${NEWS_API_KEY}`);

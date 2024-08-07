@@ -1,9 +1,9 @@
 .articles-container {
+    margin-bottom: 12px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    width: 100%;
-    margin-bottom: 12px;
+    gap: 20px;
 }
 
 .article-box-heading {
@@ -11,7 +11,7 @@
     justify-content: space-between;
 }
 
-.article-box-heading  > h2 {
+.article-box-heading>h2 {
     margin-bottom: 8px;
 }
 

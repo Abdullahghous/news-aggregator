@@ -1,5 +1,4 @@
 import Header from "../header/Header";
-import "./Home.css";
 import Banner from "../banner/Banner";
 import Article from "../articles/articles";
 import {
@@ -9,8 +8,7 @@ import {
 } from "../../services/news-api-service";
 import { useEffect, useState } from "react";
 import Filters from "../filters/Filter";
-// import ArticleCard from '../components/ArticleCard';
-// import SearchBar from '../components/SearchBar';
+import "./Home.css";
 
 const Home = () => {
   const [articles, setArticles] = useState<any[]>([]);
@@ -81,10 +79,6 @@ const Home = () => {
                 ))}
             </section>
             {/* Showing Lastest Articles */}
-            <div className="article-box-heading">
-              {/* <h2>Lastest News</h2> */}
-              {/* <h2 className="see-more">See all </h2> */}
-            </div>
             <div className="articles-container">
               {articles
                 .filter((art) => art.urlToImage !== null)

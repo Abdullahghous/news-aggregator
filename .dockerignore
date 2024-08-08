@@ -1,0 +1,40 @@
+# Node modules directory
+node_modules
+
+# Build output
+build
+
+# Log files
+*.log
+
+# Temporary files and directories
+*.tmp
+*.temp
+tmp/
+temp/
+
+# Environment files
+.env
+.env.*  # If you have multiple environment files
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# IDE and editor folders
+.vscode/
+.idea/
+*.suo
+*.ntvs_analysis.dat
+*.njsproj
+*.sln
+*.swp
+*.swo
+
+# Git files
+.git
+.gitignore
+
+# Docker files
+Dockerfile*
+docker-compose.yml

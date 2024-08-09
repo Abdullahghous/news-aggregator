@@ -1,12 +1,12 @@
 .filter-box {
     display: flex;
     justify-content: center;
-    background: #F5F5F5;
-    padding: 18px;
-    margin-top: 16px;
+    /* background: #F5F5F5; */
+    /* padding: 18px; */
+    /* margin-top: 16px; */
     align-items: center;
     flex-wrap: wrap;
-    border-radius: 18px;
+    /* border-radius: 18px; */
 }
 
 input {

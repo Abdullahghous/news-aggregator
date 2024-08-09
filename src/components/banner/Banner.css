@@ -1,11 +1,11 @@
 .banner {
-    background: #F5F5F5;
-    border-radius: 18px;
+    /* background: #F5F5F5; */
+    /* border-radius: 18px; */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 24px 0px 24px 0px;
+    /* padding: 24px 0px 24px 0px; */
     width: 100%;
 }
 
@@ -17,6 +17,8 @@
 
 .banner-info {
     text-align: center;
+    margin-top: 4px;
+    margin-bottom: 28px;
 }
 
 .banner-info > span {

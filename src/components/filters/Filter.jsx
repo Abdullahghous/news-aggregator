@@ -15,7 +15,6 @@ const Filters = ({ searchTextValue, filterDateVal, filterSourceVal, data }) => {
   };
 
   useEffect(() => {
-    // console.log('data', data);
     const sourceNames = data.map((d) => d?.source?.name);
     const uniqueNames = [...new Set(sourceNames)];
     if (uniqueNames.length) {

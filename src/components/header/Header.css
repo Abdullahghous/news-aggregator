@@ -10,6 +10,7 @@
     color: #E41B1E !important;
     font-size: 1.5rem;
     margin: 0px;
+    margin-top: -2px;
 }
 
 .header-link-box {
@@ -17,6 +18,7 @@
     justify-content: space-between;
     flex-wrap: wrap;
     width: 100%;
+    align-items: center;
 }
 
 .header-link-box > div > span {

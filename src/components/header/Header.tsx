@@ -12,9 +12,12 @@ const Header = () => {
           <span>Community</span>
         </div>
         <div>
-          <span>Stories</span>
-          <span>Creator</span>
-          <span>Community</span>
+          <span>
+            <img height={24} width={24} src="assets/img/active.png" alt="notification" />
+          </span>
+          <span>
+            <img height={24} width={24} src="assets/img/user.png" alt="user profile" />
+          </span>
         </div>
       </div>
     </section>

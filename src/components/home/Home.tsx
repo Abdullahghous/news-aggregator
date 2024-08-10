@@ -4,60 +4,60 @@ import Article from "../articles/articles";
 import {
   getNewsAPIArticles,
   getNYTArticles,
+  getGuradianArticles,
 } from "../../services/news-api-service";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Filters from "../filters/Filter";
 import "./Home.css";
 import Category from "../categroy/Category";
 
 const Home = () => {
   const [articles, setArticles] = useState<any[]>([]);
-  const [loading, isLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(true);
   const [searchVal, setSearchVal] = useState<any>("Latest");
   const [filterDate, setFilterDate] = useState<any>("");
   const [filterSource, setFilterSource] = useState<any>("");
 
-  const fetchArticles = async () => {
-    const newsAPIArticles = await getNewsAPIArticles(
-      searchVal ? searchVal : "Latest"
-    );
-    const newNYTArticles = await getNYTArticles(
-      searchVal ? searchVal : "Latest"
+  const fetchArticles = useCallback(async () => {
+    setLoading(true);
+
+    const newsAPIArticles = await getNewsAPIArticles(searchVal || "Latest");
+    const newNYTArticles = await getNYTArticles(searchVal || "Latest");
+    const newGuradianArticles = await getGuradianArticles(
+      searchVal || "Latest"
     );
 
-    let combinedArticles = [...newsAPIArticles, ...newNYTArticles];
-
-    if (filterDate & filterSource) {
-      combinedArticles = combinedArticles.filter(
-        (article) =>
-          new Date(article.publishedAt).toLocaleDateString() ===
-            new Date(filterDate).toLocaleDateString() &&
-          article.source.name === filterSource
-      );
-    } else if (filterSource) {
-      combinedArticles = combinedArticles.filter(
-        (article) => article.source.name === filterSource
-      );
-    } else if (filterDate) {
-      combinedArticles = combinedArticles.filter(
-        (article) =>
-          new Date(article.publishedAt).toLocaleDateString() ===
-          new Date(filterDate).toLocaleDateString()
-      );
-    }
+    let combinedArticles = [
+      ...newsAPIArticles,
+      ...newNYTArticles,
+      ...newGuradianArticles,
+    ];
 
     setArticles(combinedArticles);
-    isLoading(false);
-  };
+    setLoading(false);
+  }, [searchVal]);
+
+  const filterArticles = useCallback(() => {
+    return articles.filter((article) => {
+      const matchesDate =
+        !filterDate ||
+        new Date(article.publishedAt).toLocaleDateString() ===
+          new Date(filterDate).toLocaleDateString();
+      const matchesSource =
+        !filterSource || article.source.name === filterSource;
+
+      return matchesDate && matchesSource;
+    });
+  }, [articles, filterDate, filterSource]);
 
   useEffect(() => {
-    isLoading(true);
     fetchArticles();
-  }, [searchVal]);
+  }, [fetchArticles]);
+
+  const filteredArticles = filterArticles();
 
   function handleOnChangeCategory(sc: any) {
     setSearchVal(sc);
-    fetchArticles();
   }
 
   return (
@@ -67,14 +67,14 @@ const Home = () => {
         <Banner />
         <Filters
           data={articles}
-          searchTextValue={(searchVal) => setSearchVal(searchVal)}
-          filterDateVal={(date) => setFilterDate(date)}
-          filterSourceVal={(filterSource) => setFilterSource(filterSource)}
+          searchTextValue={setSearchVal}
+          filterDateVal={setFilterDate}
+          filterSourceVal={setFilterSource}
         />
       </div>
-      <Category sc={(sc) => handleOnChangeCategory(sc)} />
+      <Category sc={handleOnChangeCategory} />
       <section>
-        {articles.length == 0 && !loading ? (
+        {filteredArticles.length === 0 && !loading ? (
           <p className="no-rec-msg">No Articles Found 😞</p>
         ) : (
           <h3 style={{ margin: "0px", fontSize: "1.5rem" }}>
@@ -84,25 +84,22 @@ const Home = () => {
       </section>
       <section>
         {loading ? (
-          <div className="laoding">
+          <div className="loading">
             <div className="spinner"></div>
           </div>
         ) : (
-          <>
-            <div className="articles-container">
-              {articles
-                .filter((art) => art.urlToImage !== null)
-                // .slice(0, 4)
-                .map((article, index) => (
-                  <Article
-                    key={index}
-                    data={article}
-                    index={index}
-                    showOneOnly={false}
-                  />
-                ))}
-            </div>
-          </>
+          <div className="articles-container">
+            {filteredArticles
+              .filter((art) => art.urlToImage !== null)
+              .map((article, index) => (
+                <Article
+                  key={index}
+                  data={article}
+                  index={index}
+                  showOneOnly={false}
+                />
+              ))}
+          </div>
         )}
       </section>
     </div>
